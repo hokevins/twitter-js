@@ -4,11 +4,14 @@
   "description": "Our Twitter!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "author": "Kevin Ho & Elis Dervishi",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "chalk": "^2.3.0",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
   }
 }
