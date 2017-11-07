@@ -3,6 +3,8 @@ const app = express(); // creates an instance of an express application
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const chalk = require('chalk');
+const routes = require('./routes');
+app.use('/', routes);
 
 // SIDE NOTE: notice how our app.js script depends on numerous modules (Express, Morgan, Nunjucks, etc.) but tweetBank.js only depends on one (Lodash). Connecting dependencies together with a module system makes it much easier to grasp the overall structure and complexity of an application.
 
@@ -14,19 +16,12 @@ nunjucks.configure('views'); // point nunjucks to the proper directory for templ
 
 // Middleware, has to come first:
 app.use(function (req, res, next) { // app.use will handle all HTTP verbs, get, post, delete, and put
-    console.log(chalk.red('Request Type: ' + req.method + ' ' + req.originalUrl + ' ' + res.statusCode));
+    console.log(chalk.green('Request Type: ' + req.method + ' ' + req.originalUrl + ' ' + res.statusCode));
     // call `next`, or else your app will be a black hole — receiving requests but never properly responding
     next(); // next tell Express to find the next route and move on once function runs or else will stall the page.  You must either call next or send a response back and the route is over.
 })
 
-app.get('/', function(req, res) {
-  res.render( 'index', {title: 'Hall of Fame', people: localVars.people} );
-  // res.reder also sends completed HTML documents as a response.
-});
-
-app.get('/news', function(req, res) {
-  res.send('Here\'s the news.');
-});
+app.use(express.static(__dirname + '/public')); // looks for files inside of the public folder inside of the project folder
 
 app.listen(3000, function() {
   console.log('server listening on Port 3000');
@@ -43,8 +38,8 @@ var localVars = {
   ]
 };
 
-nunjucks.configure('views', {noCache: true}); // noCache (default: false) never use a cache and recompile templates each time (server-side)
-nunjucks.render('index.html', localVars, function(err, output) {
-  if (err) throw err;
-  console.log(output);
-});
+// nunjucks.configure('views', {noCache: true}); // noCache (default: false) never use a cache and recompile templates each time (server-side)
+// nunjucks.render('index.html', localVars, function(err, output) {
+//   if (err) throw err;
+//   console.log(output);
+// });
