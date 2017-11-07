@@ -10,6 +10,7 @@
   "author": "Kevin Ho & Elis Dervishi",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "chalk": "^2.3.0",
     "express": "^4.16.2",
     "lodash": "^4.17.4",
