@@ -23,5 +23,4 @@ app.listen(3000, function() {
   console.log('server listening on Port 3000');
 });
 
-// if (err) throw err;
-
+// if (err) throw err; for all types of Node-style callback function.  Known as "errbacks", to prevent silent errors which are difficult to debug.
